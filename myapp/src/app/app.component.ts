@@ -2,7 +2,14 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
-  template: `<p [ngClass]="myClasses">class binding example</p>`,
+  template: `
+  <input type="checkbox" [(ngModel)]="doesNotExercise"
+  (change)="adjustCSS()"/>Does not exercise.
+  <input type="checkbox" [(ngModel)]="over55" (change)="adjustCSS()"/>
+  Is over 55.
+  <div *ngIf="doesNotExercise || over55" [ngClass]="myClasses" >
+  Is at risk of heart disease.</div>
+  `,
   styles: [`
     .warning {
     font-weight:bold;
@@ -10,21 +17,18 @@ import { Component } from '@angular/core';
 
   .danger {
     color:red;
-  }
-  .highrisk {
-    text-decoration:underline;
   }`
   ]
 })
 
   export class AppComponent {
     title = 'app';
-    property1=true
-    property2=true;
-    property3=true;
+    doesNotExercise = false;
+    over55 = false;
     myClasses = {
-    warning:this.property1,
-    danger:this.property2,
-    highrisk:this.property3
-  }
+      warning: false,
+      danger: false
+    }
+    adjustCSS() {
+    }
 }
