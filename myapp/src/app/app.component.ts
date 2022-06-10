@@ -1,35 +1,30 @@
-import { getCurrencySymbol } from '@angular/common';
 import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
-  template: `
-  <label [class.danger]="foodWarning">Has food allergy.</label>
-  <input type="checkbox" [(ngModel)]="foodWarning" />
-  <br>
-  <label [class.greenDanger]="greenWarning">Turn this green.</label>
-  <input type="checkbox" [(ngModel)]="greenWarning"/>
-  `,
-
+  template: `<p [ngClass]="myClasses">class binding example</p>`,
   styles: [`
-    .danger {
-    color:orange;
+    .warning {
     font-weight:bold;
-    }
+  }
 
-    .greenDanger{
-      color:green;
-      font-weight:bold;
-    }`
+  .danger {
+    color:red;
+  }
+  .highrisk {
+    text-decoration:underline;
+  }`
   ]
 })
 
-export class AppComponent {
-  foodWarning:Boolean
-  greenWarning:Boolean
-  constructor() {
-    // Set default value to false.
-    this.foodWarning = false;
-    this.greenWarning = false;
+  export class AppComponent {
+    title = 'app';
+    property1=true
+    property2=true;
+    property3=true;
+    myClasses = {
+    warning:this.property1,
+    danger:this.property2,
+    highrisk:this.property3
   }
 }
